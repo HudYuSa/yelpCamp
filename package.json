@@ -6,7 +6,7 @@
   "scripts": {
     "build-css": "tailwindcss -i ./src/css/input.css -o ./dist/assets/css/app.css --watch",
     "server": "nodemon src/js/index.js",
-    "start": "node index.js"
+    "start": "node src/js/index.js"
   },
   "author": "",
   "license": "ISC",
