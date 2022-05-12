@@ -236,6 +236,7 @@ function handleValidationErr(err) {
   return new AppError(`Validation failed...${err.message}`, 400);
 }
 
-app.listen(3000, () => {
-  console.log("listening on port 3000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
 });
