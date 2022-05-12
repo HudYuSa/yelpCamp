@@ -1,0 +1,147 @@
+<% layout("layouts/boilerplate") %>
+<main class="p-2 mx-4 grid grid-cols-6 grid-rows-[auto_1fr]">
+  <div class="path mb-4 col-start-2 col-span-3">
+    <a class="text-c.75 mb-4" href="/campgrounds">< all campgrounds</a>
+    <a class="text-c.75 mb-4" href="/campgrounds/<%= id %> "
+      >< <%= camp.title %>
+    </a>
+  </div>
+
+  <div class="wrapper col-span-4 col-start-2 flex flex-col justify-start">
+    <form
+      class="validate-form w-full"
+      action="/campgrounds/<%=id%>?_method=PUT "
+      method="post"
+      enctype="multipart/form-data"
+      novalidate
+    >
+      <section id="pageTitle" class="mb-2 validation-success">
+        <label class="block text-c1 font-medium" for="title">Title :</label>
+        <div class="input-wrapper">
+          <input
+            id="title"
+            class="input border-2 w-full focus:outline-2 outline-blue-300 rounded-sm indent-1"
+            type="text"
+            name="campground[title]"
+            value="<%= camp.title %> "
+            required
+          />
+          <ul
+            class="relative validation-error-list text-right text-c.5 text-red-500 mt-1"
+          ></ul>
+        </div>
+      </section>
+      <section id="pageLocation" class="mb-2 validation-success">
+        <label class="block text-c1 font-medium" for="location"
+          >Location :</label
+        >
+        <div class="input-wrapper">
+          <input
+            id="location"
+            class="input border-2 w-full focus:outline-2 outline-blue-300 rounded-sm indent-1"
+            type="text"
+            name="campground[location]"
+            value="<%= camp.location %> "
+            required
+          />
+          <ul
+            class="relative validation-error-list text-right text-c.5 text-red-500 mt-1"
+          ></ul>
+        </div>
+      </section>
+
+      <section id="pageImage" class="mb-2 validation-success">
+        <label class="block text-c1 font-medium" for="image">Add Image</label>
+        <div
+          class="w-full relative border-2 cursor-pointer py-1 px-2 flex items-center"
+        >
+          <label for="image" class="w-full relative cursor-pointer">
+            <input
+              type="file"
+              id="image"
+              name="image"
+              class="custom-file-input"
+              multiple
+              accept=".jpg,.jpeg,.png"
+            />
+            add images
+            <span class="file-selected absolute right-0">no file chosen</span>
+          </label>
+          <!-- <ul
+            class="validation-error-list absolute top-8 left-0 w-full text-right text-c.5 text-red-500 mt-1"
+          ></ul> -->
+        </div>
+      </section>
+
+      <section id="pagePrice" class="mb-2 validation-success">
+        <label class="block text-c1 font-medium" for="price"
+          >Campground Price</label
+        >
+        <div class="input-wrapper rounded-sm overflow-hidden">
+          <!-- <div class="price-wrapper flex items-center"> -->
+          <!-- <span
+              class="bg-gray-400 text-center w-[10%] md:w-[5%] rounded-l-sm"
+            >
+              $
+            </span> -->
+          <input
+            id="price"
+            class="input border-2 rounded-sm w-full focus:outline-2 outline-blue-300 indent-1"
+            type="number"
+            name="campground[price]"
+            placeholder="0.00"
+            value="<%= camp.price %>"
+            min="0"
+            step=".01"
+            required
+          />
+          <!-- </div> -->
+          <ul
+            class="relative validation-error-list text-right text-c.5 text-red-500 mt-1"
+          ></ul>
+        </div>
+      </section>
+
+      <section id="pageDesc" class="mb-2 validation-success">
+        <label class="block text-c1 font-medium" for="desc">Description</label>
+        <div class="input-wrapper">
+          <textarea
+            class="input border-2 w-full focus:outline-2 outline-blue-300 rounded-sm indent-1"
+            id="desc"
+            name="campground[description]"
+            rows="5"
+            style="resize: none"
+            required
+          >
+<%= camp.description %> </textarea
+          >
+          <ul
+            class="relative validation-error-list text-right text-c.5 text-red-500"
+          ></ul>
+        </div>
+      </section>
+
+      <section class="mb-2">
+        <% camp.images.forEach((img,i)=>{%>
+        <img src="<%= img.thumbnail %> " alt="camp img" />
+        <div class="form-check-inline inline-block">
+          <input
+            type="checkbox"
+            id="image-<%= i %>"
+            name="deleteImages[]"
+            value="<%= img.filename %>"
+          />
+        </div>
+        <label class="inline-block font-bold mb-4" for="image-<%= i %>"
+          >Delete?</label
+        >
+        <% }) %>
+      </section>
+
+      <button class="btn-green w-full mt-6">Update Campgrounds</button>
+    </form>
+    <a class="btn-red mt-2" href="/campgrounds/<%= id %>">Cancel</a>
+  </div>
+</main>
+
+<script src="/assets/js/file.js"></script>

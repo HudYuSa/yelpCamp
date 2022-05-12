@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YelpCamp</title>
+    <script
+      src="https://kit.fontawesome.com/91131540a2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/assets/css/app.css" />
+    <!-- mapbox -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css"
+      rel="stylesheet"
+    />
+  </head>
+  <!-- <body class="flex flex-col min-h-screen"> -->
+  <body class="grid w-full min-h-screen grid-rows-[auto_1fr_auto] bg-gray-100">
+    <!-- navbar -->
+    <%- include("../partials/navbar") %>
+    <!-- main(custom) -->
+    <div><%- include("../partials/flash") %> <%- body %></div>
+    <!-- footer -->
+    <%- include("../partials/footer") %>
+    <script src="../../assets/js/form-validation.js"></script>
+    <script src="../../assets/js/alert.js"></script>
+  </body>
+</html>

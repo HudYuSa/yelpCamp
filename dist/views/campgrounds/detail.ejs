@@ -1,0 +1,176 @@
+<% layout("layouts/boilerplate") %>
+
+
+<main class="my-2 mx-4 py-2 grid grid-cols-12 grid-rows-[auto_auto_1fr]">
+  <div class="path mb-2 col-span-full">
+    <!-- <div class="path mb-2 col-span-full md:col-start-2 md:col-span-10"> -->
+    <a class="text-c.75 mb-4" href="/campgrounds">< all campgrounds</a>
+  </div>
+  <!-- mapbox map -->
+  <div class="mapbox-map col-span-12 aspect-video p-8 ">
+    <div id="map" class="w-full h-full" ></div>
+  </div>
+
+  <div class="wrapper col-span-full grid grid-cols-6 gap-4">
+    <!-- <div
+    class="wrapper col-span-full md:col-span-10 md:col-start-2 grid grid-cols-6 gap-4"
+  > -->
+    <section class="main col-span-full md:col-span-4">
+      <div class="card mb-3 rounded-t-md overflow-hidden">
+        <!-- <figure>
+          <% camp.images.forEach(img=>{%>
+          <img
+            class="w-full"
+            src="<%= img.url %>"
+            alt="camp ground location image"
+          />
+          <% }) %>
+        </figure> -->
+
+        <div aria-label="card images" class="overflow-hidden">
+          <div class="carousel relative w-full aspect-video" data-carousel>
+            <ul data-slides>
+              <% for( let i = 0; i < camp.images.length; i++ ) { %>
+                <li class="slide" <%= i==0?"data-active" : "" %> >
+                  <img
+                  src="<%=camp.images[i].url%>"
+                  alt="campground image"
+                  class="slide-img"
+                  />
+                </li>
+                <% } %>
+            </ul>
+            <% if (camp.images.length > 1) { %>
+              <button class="carousel-btn prev" data-carousel-btn="prev">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="carousel-btn next" data-carousel-btn="next">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            <% } %>
+          </div>
+        </div>
+
+        <article
+          class="border-2 border-t-0 divide-y-2 border-gray-300 flex flex-col"
+        >
+          <div style="border-top: 0" class="divider p-2">
+            <h1 class="text-c1.5 mb-2"><%= camp.title %></h1>
+            <p class="text-c.6"><%= camp.description %></p>
+          </div>
+          <div class="divider p-2">
+            <h2 class="text-c.75 text-gray-500"><%= camp.location %></h2>
+          </div>
+          <div class="divider p-2">
+            <h2 class="text-c.75">
+              Submitted by :
+              <span class="font-semibold"><%= author.username %></span>
+            </h2>
+          </div>
+          <div class="divider p-2">
+            <h2 class="text-c.75">$<%= camp.price %>/night</h2>
+          </div>
+          <!-- .equals() is a mongoose comparison function that can be use to compare objectId etc and if a reference object id populated than you can use only the reference to compare but it will act as if it was the full object of that reference or you can specify what part of the object you want to compare -->
+          <% if (currentUser&&author._id.equals(currentUser._id)) { %>
+          <div class="divider p-2">
+            <a class="btn-blue" href="/campgrounds/<%=id%>/edit"
+              >Edit Campground</a
+            >
+            <form
+              class="inline"
+              action="/campgrounds/<%=id%>?_method=DELETE"
+              method="post"
+            >
+              <button class="btn-red">Delete Campground</button>
+            </form>
+          </div>
+          <% } %>
+        </article>
+        <footer
+          class="bg-gray-100 border-2 border-t-0 rounded-b-md text-center"
+        >
+          <span class="text-c.75">2 days ago</span>
+        </footer>
+      </div>
+    </section>
+
+    <section class="aside col-span-full md:col-span-2 overflow-hidden">
+      <% if (currentUser) { %>
+
+      <form
+        class="validate-form border-2 border-gray-400 p-4 mb-6 rounded-md overflow-hidden"
+        action="/campgrounds/<%=id%>/reviews"
+        method="post"
+        novalidate
+      >
+        <div class="mb-6">
+          <h2 class="mb-3 text-c1.2 font-medium">Leave a Review</h2>
+          <section class="mb-1">
+            <label class="block text-c1" for="rating">Rating</label>
+            <input
+              class="w-full"
+              type="range"
+              name="review[rating]"
+              id="rating"
+              min="1"
+              max="5"
+            />
+          </section>
+          <section class="mb-1">
+            <label class="text-c1" for="review-text">Review</label>
+            <div class="input-wrapper">
+              <textarea
+                class="input text-c.75 border-2 w-full focus:outline-2 outline-blue-300 rounded-sm indent-1"
+                name="review[body]"
+                id="review-text"
+                rows="5"
+                style="resize: none"
+                required
+              ></textarea>
+              <ul
+                class="relative validation-error-list text-right text-c.5 text-red-500 mt-1"
+              ></ul>
+            </div>
+          </section>
+          <button class="btn-green mt-6">submit</button>
+        </div>
+      </form>
+      <% } %>
+      <div
+        class="reviews border-2 border-gray-400 p-4 max-h-[50vh] overflow-y-scroll rounded-md"
+      >
+        <h2 class="mb-3 text-c1.2 font-medium">All Reviews</h2>
+        <ul>
+          <% reviews.forEach((review,idx)=>{ %>
+          <li class="mb-2">
+            <h3 class="text-c.75 tracking-wider"><%= users[idx].username %></h3>
+            <span class="stars">
+              <% for( let i = 0; i < review.rating; i++ ) { %>
+              <i class="fa-solid fa-star text-yellow-400 text-c.5"></i>
+              <% } %>
+            </span>
+            <p class="text-c.75 leading- tracking-wide"><%= review.body %></p>
+            <% if (currentUser&&users[idx]._id.equals(currentUser._id)) { %>
+            <form
+              action="/campgrounds/<%=id%>/reviews/<%= review._id%>?_method=DELETE"
+              method="post"
+            >
+              <button class="btn-red text-c.3">Delete</button>
+            </form>
+            <% } %>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="../../assets/js/carousel.js"></script>
+
+<script>
+  const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+  const campground = <%-JSON.stringify(camp)%>
+</script>
+
+<script src="/assets/js/detailMap.js"></script>

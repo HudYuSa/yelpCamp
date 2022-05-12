@@ -1,0 +1,44 @@
+<% layout("layouts/boilerplate") %>
+
+<main class="p-2">
+  <div id="map" class="w-full aspect-video"></div>
+
+  <h1 class="text-c1.25">All Campground</h1>
+  <button
+    class="text-c1 bg-blue-300 rounded-md px-2 py-0 mt-2 mb-4 hover:bg-blue-200 ease-in duration-100 active:scale-95"
+  >
+    <a href="/campgrounds/new">make a new campground</a>
+  </button>
+
+  <% for( let camp of campgrounds ) { %>
+  <article
+    class="grid grid-cols-6 gap-4 mb-2 p-2 border-2 border-gray-200 w-[100%] mx-auto"
+  >
+    <div class="col-span-2 col-start-1 flex items-center">
+      <% if (camp.images[0]) { %>
+      <img
+        class="w-full h-full object-cover"
+        src="<%= camp.images[0].url %> "
+        alt="campground img"
+      />
+      <% } %>
+    </div>
+    <div class="col-span-4 col-start-3 flex flex-col justify-center">
+      <h2 class="text-c1.25"><%= camp.title %></h2>
+
+      <p class="text-c.7"><%= camp.description %></p>
+      <a
+        class="text-c.7 text-blue-500 underline"
+        href="/campgrounds/<%= camp._id %>"
+        ><%= camp.title %> campground details</a
+      >
+    </div>
+  </article>
+  <% } %>
+</main>
+
+<script>
+  const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+  const campgrounds ={features:<%-JSON.stringify(campgrounds)%>}
+</script>
+<script src="/assets/js/allCampMap.js"></script>

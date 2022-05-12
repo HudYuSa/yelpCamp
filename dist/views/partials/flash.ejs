@@ -1,0 +1,47 @@
+<% if (success.length) { %>
+<div
+  class="alert absolute z-10 left-0 right-0 py-4 px-6 bg-green-300 border-2 border-green-600 flex justify-between items-center"
+  role="alert"
+>
+  <p><%= success %></p>
+  <div class="close cursor-pointer active:scale-90">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 z-10"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </div>
+</div>
+<% } %> <% if (error.length) { %>
+<div
+  class="alert absolute z-10 left-0 right-0 py-4 px-6 bg-red-300 border-2 border-red-600 flex justify-between items-center"
+  role="alert"
+>
+  <p><%= error %></p>
+  <div class="close cursor-pointer active:scale-90">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </div>
+</div>
+<% } %>

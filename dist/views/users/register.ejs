@@ -1,0 +1,71 @@
+<% layout("layouts/boilerplate") %>
+
+<main
+  class="p-2 mx-4 grid gap-2 grid-cols-6 grid-rows-[1fr_2fr_1fr] lg:w-[60vw] lg:m-auto"
+>
+  <div class="form-wrapper">
+    <h1 class="text-center text-c2">YelpCamp</h1>
+    <form
+      action="/register"
+      method="post"
+      class="validate-form w-full"
+      novalidate
+    >
+      <section id="pageTitle" class="mb-2">
+        <label class="block text-c1 font-medium" for="username">Username</label>
+        <div class="input-wrapper">
+          <input
+            id="username"
+            class="input border-2 w-full focus:outline-2 outline-blue-300 rounded-sm indent-1"
+            type="text"
+            name="user[username]"
+            autofocus
+            required
+          />
+          <ul
+            class="relative validation-error-list text-right text-c.5 text-red-500 mt-1"
+          ></ul>
+        </div>
+      </section>
+      <section id="pageTitle" class="mb-2">
+        <label class="block text-c1 font-medium" for="password">Password</label>
+        <div class="input-wrapper">
+          <input
+            id="password"
+            class="input border-2 w-full focus:outline-2 outline-blue-300 rounded-sm indent-1"
+            type="password"
+            name="user[password]"
+            required
+          />
+          <ul
+            class="relative validation-error-list text-right text-c.5 text-red-500 mt-1"
+          ></ul>
+        </div>
+      </section>
+      <section id="pageTitle" class="mb-2">
+        <label class="block text-c1 font-medium" for="email">Email</label>
+        <div class="input-wrapper">
+          <input
+            id="email"
+            class="input border-2 w-full focus:outline-2 outline-blue-300 rounded-sm indent-1"
+            type="email"
+            name="user[email]"
+            required
+          />
+          <ul
+            class="relative validation-error-list text-right text-c.5 text-red-500 mt-1"
+          ></ul>
+        </div>
+      </section>
+
+      <button class="btn-blue w-full mt-6">Sign Up</button>
+    </form>
+  </div>
+  <div class="image-wrapper">
+    <img
+      class="w-full h-full object-cover"
+      src="https://images.unsplash.com/photo-1571687949921-1306bfb24b72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FtcGluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+      alt="camping image"
+    />
+  </div>
+</main>

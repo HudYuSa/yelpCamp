@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home page</title>
+    <link rel="stylesheet" href="/assets/css/app.css" />
+  </head>
+  <body class="bg-gray-700 bg-hero-pattern bg-cover bg-center">
+    <div class="m-auto h-screen w-[80vw] grid grid-rows-[auto_1fr_auto]">
+      <header class="p-4">
+        <nav class="flex">
+          <a href="/" class="text-white text-c1.25 font-bold">YelpCamp</a>
+          <ul class="flex ml-auto">
+            <li class="home-nav-link">
+              <a href="/">Home</a>
+            </li>
+            <li class="home-nav-link">
+              <a href="/campgrounds">Campgrounds</a>
+            </li>
+            <% if(!currentUser) { %>
+            <li class="home-nav-link">
+              <a href="/login">Login</a>
+            </li>
+            <% } else { %>
+            <li class="home-nav-link">
+              <a href="/logout">Logout</a>
+            </li>
+            <% } %>
+          </ul>
+        </nav>
+      </header>
+      <main class="text-center flex items-center text-gray-100">
+        <div>
+          <h1 class="text-c2 font-bold">YelpCamp</h1>
+          <h2 class="text-c1">Welcome to YelpCamp!</h2>
+          <p class="mb-4 text-c.75">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Voluptatibus neque earum ex enim nemo perferendis error, repellendus
+            quasi amet aliquid excepturi!
+          </p>
+          <a href="/campgrounds" class="btn font-bold">View Campgrounds</a>
+        </div>
+      </main>
+      <footer class="text-center text-gray-300">
+        <p>&copy; 2020 YelpCamp</p>
+      </footer>
+    </div>
+  </body>
+</html>

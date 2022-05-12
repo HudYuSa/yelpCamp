@@ -1,0 +1,14 @@
+<% layout("layouts/boilerplate") %>
+<main class="p-2 grid grid-cols-12">
+  <div class="wrapper my-10 col-span-10 col-start-2">
+    <div class="bg-red-300">
+      <h1 class="text-c1.5 p-2"><%= err.message %></h1>
+      <div class="p-3 pt-0">
+        <p>look's like there's an error occured</p>
+        <% if (process.env.NODE_ENV !== "production") { %>
+        <p class="text-c.75"><%= err.stack %></p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</main>

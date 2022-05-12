@@ -1,0 +1,58 @@
+<!-- navbar -->
+<nav
+  class="flex justify-between items center p-3 bg-gray-700 sticky top-0 min-w-full z-50"
+>
+  <div class="flex items-center w-screen">
+    <a href="/" class="block text-white text-c1.25"><span>YelpCamp</span></a>
+    <ul class="ml-5 navbar-nav flex items-center justify-evenly">
+      <li class="nav-item mr-3">
+        <a href="/" class="nav-link text-c.8 text-gray-400 hover:text-gray-100"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item mr-3">
+        <a
+          href="/campgrounds"
+          class="nav-link text-c.8 text-gray-400 hover:text-gray-100"
+          >Campgrounds</a
+        >
+      </li>
+      <li class="nav-item mr-3">
+        <a
+          href="/campgrounds/new"
+          class="nav-link text-c.8 text-gray-400 hover:text-gray-100"
+          >New Campground</a
+        >
+      </li>
+    </ul>
+    <div class="navbar-nav ml-auto flex items-center">
+      <% if(!currentUser) { %>
+      <div class="cursor-pointer mr-2">
+        <a href="/login"> login </a>
+      </div>
+      <% } else { %>
+      <div class="cursor-pointer">
+        <a href="/logout"> logout </a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  <!-- <div
+        class="menu-bars xsm:hidden flex items-center cursor-pointer relative"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </div> -->
+</nav>
