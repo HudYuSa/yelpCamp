@@ -50,6 +50,7 @@ const campgroundsRoute = require("./routes/campgroundsRoute");
 const reviewsRoute = require("./routes/reviewsRoute");
 const usersRoute = require("./routes/usersRoute");
 const { func } = require("joi");
+const { db } = require("./models/user");
 
 // console.log(path.resolve(__dirname, "../../dist/views"));
 //! ==================================
@@ -77,7 +78,7 @@ async function main() {
   const secret = process.env.SECRET || "reallysecret";
 
   const store = MongoStore.create({
-    mongoUrl: "mongodb://localhost:27017/yelpCamp",
+    mongoUrl: dbUrl,
     secret: secret,
     touchAfter: 24 * 3600,
   });
